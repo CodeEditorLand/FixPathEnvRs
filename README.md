@@ -8,7 +8,7 @@ running a GUI app.
 GUI apps on macOS and Linux do not inherit the `$PATH` from your shell dotfiles
 (_.bashrc, .bash_profile, .zshrc, etc_).
 
-## Installation
+## 🚀 Installation
 
 Please note, below in the dependencies you can also lock to a revision/tag in
 the `Cargo.toml`.
@@ -18,7 +18,7 @@ the `Cargo.toml`.
 fix-path-env = { git = "https://github.com/tauri-apps/fix-path-env-rs" }
 ```
 
-## Usage
+## 🛠️ Usage
 
 Call `fix_path_env::fix()` as early as possible in your `main` function in
 `main.rs` file
