@@ -5,9 +5,9 @@
 use fix_path_env::fix;
 
 fn main() {
-  if let Err(e) = fix() {
-    println!("{}", e);
-  } else {
-    println!("PATH: {}", std::env::var("PATH").unwrap());
-  }
+	if let Err(e) = fix() {
+		println!("{}", e);
+	} else {
+		println!("PATH: {}", std::env::var("PATH").unwrap());
+	}
 }
