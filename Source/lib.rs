@@ -13,12 +13,13 @@ pub enum Error {
 	EchoFailed(String),
 }
 
-/// Reads the shell configuration to properly set all given environment variables.
+/// Reads the shell configuration to properly set all given environment
+/// variables.
 ///
 /// ## Platform-specific
 ///
 /// - **Windows**: Does nothing as the environment variables are already set.
-pub fn fix_vars(vars: &[&str]) -> std::result::Result<(), Error> {
+pub fn fix_vars(vars:&[&str]) -> std::result::Result<(), Error> {
 	#[cfg(windows)]
 	{
 		let _ = vars;
@@ -27,8 +28,10 @@ pub fn fix_vars(vars: &[&str]) -> std::result::Result<(), Error> {
 	}
 	#[cfg(not(windows))]
 	{
-		let default_shell = if cfg!(target_os = "macos") { "/bin/zsh" } else { "/bin/sh" };
-		let shell = std::env::var("SHELL").unwrap_or_else(|_| default_shell.into());
+		let default_shell =
+			if cfg!(target_os = "macos") { "/bin/zsh" } else { "/bin/sh" };
+		let shell =
+			std::env::var("SHELL").unwrap_or_else(|_| default_shell.into());
 
 		let out = std::process::Command::new(shell)
       .arg("-ilc")
@@ -57,7 +60,9 @@ pub fn fix_vars(vars: &[&str]) -> std::result::Result<(), Error> {
 			}
 			Ok(())
 		} else {
-			Err(Error::EchoFailed(String::from_utf8_lossy(&out.stderr).into_owned()))
+			Err(Error::EchoFailed(
+				String::from_utf8_lossy(&out.stderr).into_owned(),
+			))
 		}
 	}
 }
@@ -67,15 +72,11 @@ pub fn fix_vars(vars: &[&str]) -> std::result::Result<(), Error> {
 /// ## Platform-specific
 ///
 /// - **Windows**: Does nothing as the environment variables are already set.
-pub fn fix() -> std::result::Result<(), Error> {
-	fix_vars(&["PATH"])
-}
+pub fn fix() -> std::result::Result<(), Error> { fix_vars(&["PATH"]) }
 
 /// Reads the shell configuration to properly set all environment variables.
 ///
 /// ## Platform-specific
 ///
 /// - **Windows**: Does nothing as the environment variables are already set.
-pub fn fix_all_vars() -> std::result::Result<(), Error> {
-	fix_vars(&[])
-}
+pub fn fix_all_vars() -> std::result::Result<(), Error> { fix_vars(&[]) }
