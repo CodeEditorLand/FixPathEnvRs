@@ -28,10 +28,8 @@ pub fn fix_vars(vars:&[&str]) -> std::result::Result<(), Error> {
 	}
 	#[cfg(not(windows))]
 	{
-		let default_shell =
-			if cfg!(target_os = "macos") { "/bin/zsh" } else { "/bin/sh" };
-		let shell =
-			std::env::var("SHELL").unwrap_or_else(|_| default_shell.into());
+		let default_shell = if cfg!(target_os = "macos") { "/bin/zsh" } else { "/bin/sh" };
+		let shell = std::env::var("SHELL").unwrap_or_else(|_| default_shell.into());
 
 		let out = std::process::Command::new(shell)
       .arg("-ilc")
@@ -60,9 +58,7 @@ pub fn fix_vars(vars:&[&str]) -> std::result::Result<(), Error> {
 			}
 			Ok(())
 		} else {
-			Err(Error::EchoFailed(
-				String::from_utf8_lossy(&out.stderr).into_owned(),
-			))
+			Err(Error::EchoFailed(String::from_utf8_lossy(&out.stderr).into_owned()))
 		}
 	}
 }
