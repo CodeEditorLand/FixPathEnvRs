@@ -6,8 +6,8 @@ license-file = "LICENSE"
 edition = "2021"
 
 [dependencies]
-thiserror = "1"
-home = "0.5"
+thiserror = { version = "1" }
+home = { version = "0.5" }
 
 [target."cfg(not(target_os = \"windows\"))".dependencies]
 strip-ansi-escapes = "0.2"
